@@ -28,7 +28,9 @@ Merging PDFs uses the `merge` command of pdftools.
 The automatically generated usage for this command
 is:
 ``` commandline
-usage: pdftool.py merge [-h] [-o OUTPUT_FILE] source merge
+usage: pdftool.py merge [-h] [-s SOURCE_RANGE SOURCE_RANGE]
+                        [-m MERGE_RANGE MERGE_RANGE] [-o OUTPUT_FILE]
+                        source merge
 
 positional arguments:
   source                The pdf that will be stitched on to
@@ -36,6 +38,10 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
+  -s SOURCE_RANGE SOURCE_RANGE, --source_range SOURCE_RANGE SOURCE_RANGE
+                        Range of pages to include in merged pdf. ex) -s 2 END
+  -m MERGE_RANGE MERGE_RANGE, --merge_range MERGE_RANGE MERGE_RANGE
+                        Range of pages to include in merged pdf. ex) -m 2 END
   -o OUTPUT_FILE, --output_file OUTPUT_FILE
                         The name of the outputted pdf
 ```
@@ -57,3 +63,10 @@ Example usage:
 ``` commandline
 python3 pdftool.py merge pdf1.pdf pdf2.pdf -o myCombinedPDF.pdf
 ```
+
+Example usage combining with page ranges:
+``` commandline
+python3 pdftool.py merge pdf1.pdf pdf2.pdf -s 1 3 -m 5 END
+```
+This command will merge pages 1, 2, 3 from pdf1.pdf and pages 5 and on
+from pdf2.pdf into a combined pdf called output.pdf
