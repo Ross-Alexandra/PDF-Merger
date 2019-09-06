@@ -5,6 +5,9 @@ A simple project to make working with pdfs easy.
     - Merging PDFs.
 
 ### Planned support
+    - Slicing PDFs.
+    - Reordering PDFs.
+    - Interactive working with PDFs.
 There are currently no plans to expand functionality. However, this
 is due to other projects rather than lack of interest. If you have
 a feature you want added to this tool, open an issue.
