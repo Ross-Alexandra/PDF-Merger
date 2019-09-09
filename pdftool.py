@@ -9,19 +9,23 @@ def handle_merge(args):
 
             print(f"Attempting to merge {merge} into {source}.")
 
-            if "source_range" in args:
+            if "source_range" in args and args.source_range is not None:
                 source_range, log_str = get_merge_range(args.source_range[0], args.source_range[1])
                 if log_str:
                     print(log_str + f" for {source}")
+            else:
+                source_range = None
 
-            if "merge_range" in args:
+            if "merge_range" in args and args.merge_range is not None:
                 merge_range, log_str = get_merge_range(args.merge_range[0], args.merge_range[1])
                 if log_str:
                     print(log_str + f" for {merge}")
+            else:
+                merge_range = None
 
         except Exception as e:
             print(f"Error reading arguments: {e}.\nPlease try again.\nArgs for this run: {args}")
-            exit()
+            raise e
 
         return merge_pdf(source, merge, source_range, merge_range)
 
@@ -41,7 +45,7 @@ if __name__ == "__main__":
     merge_parser.add_argument('-o', '--output_file', help="The name of the outputted pdf", type=str, nargs=1)
 
     args = parser.parse_args()
-    output_filename = args.output_file[0] if args.output_file[0] else "output.pdf"
+    output_filename = args.output_file[0] if args.output_file else "output.pdf"
 
 
     # If merge and source are in args
